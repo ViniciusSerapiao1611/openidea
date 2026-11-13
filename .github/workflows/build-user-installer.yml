@@ -1,5 +1,9 @@
-﻿name: OpenIDEA Windows User Installer
-on:`r`n  push:`r`n    branches:`r`n      - build-user-installer`r`n  workflow_dispatch:
+name: OpenIDEA Windows User Installer
+on:
+  push:
+    branches:
+      - build-user-installer
+  workflow_dispatch:
 jobs:
   build:
     runs-on: windows-latest
@@ -22,4 +26,3 @@ jobs:
           name: OpenIDEA-NSIS-currentUser
           path: src-tauri/target/release/bundle/nsis/*.exe
           if-no-files-found: error
-
