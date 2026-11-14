@@ -19,6 +19,12 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - name: Install dependencies
         run: pnpm install
+      - name: Normalize Tauri config (UTF-8 without BOM)
+        shell: pwsh
+        run: |
+          $path = "src-tauri/tauri.conf.json"
+          $content = [System.IO.File]::ReadAllText($path)
+          [System.IO.File]::WriteAllText($path, $content, [System.Text.UTF8Encoding]::new($false))
       - name: Build NSIS per-user
         run: pnpm tauri build --bundles nsis
       - uses: actions/upload-artifact@v4
